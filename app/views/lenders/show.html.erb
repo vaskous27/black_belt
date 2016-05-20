@@ -1,0 +1,60 @@
+<h4> Name: <%= @show_lender.first_name %> <%= @show_lender.last_name %></h4>
+<h4> Acount Balance: <%= @show_lender.money %></h4>
+
+<h4> List of People who need your help: </h4>
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Need Money For</th>
+		<th>Reason for Loan</th>
+		<th>Amount</th>
+		<th>Amount Raised</th>
+		<th>Action</th>
+	</tr>
+	<% @borrowers.each do |b| %>
+	<tr>
+		<td><%= b.first_name %> <%= b.last_name %></td>
+		<td><%= b.need_money %></td>
+		<td><%= b.desc %></td>
+		<td><%= b.amount_needed %></td>
+		<td><form action='/transactions' method='post'>
+			<input type='hidden' name="authenticity_token" value="<%= form_authenticity_token %>">
+			<input type='hidden' name="borrower_id" value="<%= b.id %>">
+			<input type='hidden' name="lender_id" value="<%= @show_lender.id %>">
+			<select name='money_given'>
+			<option value='25'>$25</option>
+			<option value='50'>$50</option>
+			<option value='100'>$100</option>
+			<option value='500'>$500</option>
+			<option value='1000'>$1000</option>
+			</select>
+			<input type='submit' value='Lend'>
+			</form></td>
+
+	</tr>
+	<% end %>
+</table>
+
+
+<h4> List of People who you lent money to: </h4>
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Need Money For</th>
+		<th>Reason for Loan</th>
+		<th>Amount Needed</th>
+		<th>Amount Raised</th>
+		<th>Amount Lent</th>
+	</tr>
+
+	<tr>
+	<td><%= @debtors.first_name %><%= @debtors.last_name %></td>
+	<td><%= @debtors.need_money %></td>
+	<td><%= @debtors.desc %></td>
+	<td><%= @debtors.amount_needed %></td>
+	<td><%= @debtors.money_raised %></td>
+	<td><%= @lended_money %></td>
+	</tr>
+	</table>

@@ -1,0 +1,23 @@
+<h4> Name: <%= @show_borrower.first_name %> <%= @show_borrower.last_name %></h4>
+<h4> Amount Needed: <%= @show_borrower.amount_needed %></h4>
+<h4> Ammount Raised: <%= @show_borrower.money_raised %> </h4>
+
+
+<h4> List of People who lend you money: </h4>
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Amount Lent</th>
+	</tr>
+
+	
+	<tr>
+		<td><%= @lenders %><%= @lenders_last %></td>
+		<td><%= @lenders_email %></td>
+	</tr>
+</table>
+
+
+
